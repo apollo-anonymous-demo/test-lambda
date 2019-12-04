@@ -1,0 +1,180 @@
+---
+swagger: "2.0"
+info:
+  version: "2019-12-04T02:15:00Z"
+  title: "PetStore"
+host: "2xu092dlv9.execute-api.us-east-1.amazonaws.com"
+basePath: "/Alpha"
+schemes:
+- "https"
+paths:
+  /:
+    get:
+      consumes:
+      - "application/json"
+      produces:
+      - "text/html"
+      parameters: []
+      responses:
+        "200":
+          description: "200 response"
+          headers:
+            Content-Type:
+              type: "string"
+  /pets:
+    get:
+      produces:
+      - "application/json"
+      parameters:
+      - name: "type"
+        in: "query"
+        required: false
+        type: "string"
+        x-exportParamName: "Type_"
+        x-optionalDataType: "String"
+      - name: "page"
+        in: "query"
+        required: false
+        type: "string"
+        x-exportParamName: "Page"
+        x-optionalDataType: "String"
+      responses:
+        "200":
+          description: "200 response"
+          headers:
+            Access-Control-Allow-Origin:
+              type: "string"
+          schema:
+            $ref: "#/definitions/Pets"
+    post:
+      operationId: "CreatePet"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - in: "body"
+        name: "NewPet"
+        required: true
+        schema:
+          $ref: "#/definitions/NewPet"
+        x-exportParamName: "NewPet"
+      responses:
+        "200":
+          description: "200 response"
+          headers:
+            Access-Control-Allow-Origin:
+              type: "string"
+          schema:
+            $ref: "#/definitions/NewPetResponse"
+    options:
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters: []
+      responses:
+        "200":
+          description: "200 response"
+          headers:
+            Access-Control-Allow-Origin:
+              type: "string"
+            Access-Control-Allow-Methods:
+              type: "string"
+            Access-Control-Allow-Headers:
+              type: "string"
+          schema:
+            $ref: "#/definitions/Empty"
+  /pets/{petId}:
+    get:
+      operationId: "GetPet"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "petId"
+        in: "path"
+        required: true
+        type: "string"
+        x-exportParamName: "PetId"
+      responses:
+        "200":
+          description: "200 response"
+          headers:
+            Access-Control-Allow-Origin:
+              type: "string"
+          schema:
+            $ref: "#/definitions/Pet"
+    options:
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "petId"
+        in: "path"
+        required: true
+        type: "string"
+        x-exportParamName: "PetId"
+      responses:
+        "200":
+          description: "200 response"
+          headers:
+            Access-Control-Allow-Origin:
+              type: "string"
+            Access-Control-Allow-Methods:
+              type: "string"
+            Access-Control-Allow-Headers:
+              type: "string"
+          schema:
+            $ref: "#/definitions/Empty"
+definitions:
+  Pets:
+    type: "array"
+    items:
+      $ref: "#/definitions/Pet"
+  Empty:
+    type: "object"
+  NewPetResponse:
+    type: "object"
+    properties:
+      pet:
+        $ref: "#/definitions/Pet"
+      message:
+        type: "string"
+    example:
+      message: "message"
+      pet:
+        price: 6.02745618307040320615897144307382404804229736328125
+        id: 0
+        type: "type"
+  Pet:
+    type: "object"
+    properties:
+      id:
+        type: "integer"
+      type:
+        type: "string"
+      price:
+        type: "number"
+    example:
+      price: 6.02745618307040320615897144307382404804229736328125
+      id: 0
+      type: "type"
+  NewPet:
+    type: "object"
+    properties:
+      type:
+        $ref: "#/definitions/PetType"
+      price:
+        type: "number"
+    example:
+      price: 0.80082819046101150206595775671303272247314453125
+      type: {}
+  PetType:
+    type: "string"
+    enum:
+    - "dog"
+    - "cat"
+    - "fish"
+    - "bird"
+    - "gecko"
