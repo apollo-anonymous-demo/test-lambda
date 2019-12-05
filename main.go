@@ -13,7 +13,6 @@ import (
     "log"
 
     "github.com/apex/gateway"
-    "github.com/aws/aws-lambda-go"
 
 	// WARNING!
 	// Change this to a fully-qualified import path
@@ -22,7 +21,7 @@ import (
 	//
 	//    sw "github.com/myname/myrepo/go"
 	//
-	sw "./go"
+	sw "github.com/apollo-anonymous-demo/test-lambda/go"
 )
 
 func main() {

@@ -27,7 +27,7 @@ type Route struct {
 type Routes []Route
 
 func NewRouter() *mux.Router {
-	router := mux.NewRouter().StrictSlash(true)
+    router := mux.NewRouter().StrictSlash(true)
 	for _, route := range routes {
 		var handler http.Handler
 		handler = route.HandlerFunc
@@ -48,52 +48,41 @@ func Index(w http.ResponseWriter, r *http.Request) {
 }
 
 var routes = Routes{
-	Route{
-		"Index",
-		"GET",
-		"/Alpha/",
-		Index,
-	},
-
+	
 	Route{
 		"CreatePet",
 		strings.ToUpper("Post"),
-		"/Alpha/pets",
+		"/pets",
 		CreatePet,
 	},
-
 	Route{
 		"GetPet",
 		strings.ToUpper("Get"),
-		"/Alpha/pets/{petId}",
+		"/pets/{petId}",
 		GetPet,
 	},
-
 	Route{
 		"PetsGet",
 		strings.ToUpper("Get"),
-		"/Alpha/pets",
+		"/pets",
 		PetsGet,
 	},
-
 	Route{
 		"PetsOptions",
 		strings.ToUpper("Options"),
-		"/Alpha/pets",
+		"/pets",
 		PetsOptions,
 	},
-
 	Route{
 		"PetsPetIdOptions",
 		strings.ToUpper("Options"),
-		"/Alpha/pets/{petId}",
+		"/pets/{petId}",
 		PetsPetIdOptions,
 	},
-
 	Route{
 		"RootGet",
 		strings.ToUpper("Get"),
-		"/Alpha/",
+		"/",
 		RootGet,
 	},
 }
